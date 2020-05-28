@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import {Navbar, NavbarBrand} from 'reactstrap';
 import './App.css';
-
+import Menu from './Components/Menu'
 
 class App extends Component {
   render() {
@@ -12,7 +12,9 @@ class App extends Component {
       <div className = "container">
       <NavbarBrand className="active" href = '/'>Ristorante con Fusion</NavbarBrand>
       </div>    
+
       </Navbar>
+      <Menu />
       </div> 
       
     );
