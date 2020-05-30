@@ -4,10 +4,7 @@ import { Card, CardImg,CardImgOverlay, CardText,CardBody, CardTitle} from 'react
 class DishDetail extends Component {
 constructor(props) {
         super(props);
-        this.state = {
-          selectedDish: null            
-        };
-    }
+       }
 
 
     renderDish(dish) {
@@ -60,18 +57,19 @@ constructor(props) {
 
 
 	render() {
-    if(this.props.dishes){
+    if(this.props.dish){
     // const me = this.props.dishes.map((Dish) => {
     return (
+      <div className="container">
       <div className="row">
         <div className="col-12 col-md-5 m-1">
-          {this.renderDish(this.props.dishes)}
+          {this.renderDish(this.props.dish)}
        </div>
       <div className="col-12 col-md-5 m-1">
-        {this.renderComments(this.props.dishes.comments)}
+        {this.renderComments(this.props.dish.comments)}
       </div>
     </div>
-      // <div className="container">
+     </div> // <div className="container">
   
     );
   }
