@@ -1,19 +1,49 @@
 import React , {Component}  from 'react';
-import {Navbar, Jumbotron , NavbarBrand} from 'reactstrap';
-
+import {Navbar, Nav,NavItem,NavbarToggler,Collapse,Jumbotron , NavbarBrand} from 'reactstrap';
+import {NavLink} from 'react-router-dom'
 class Header extends Component{
+    constructor(props){
+        super(props);
+        this.toggleNav = this.toggleNav.bind(this);
+        this.state={
+            isNavOpen: false
+        };
+
+    }
+    toggleNav(){
+        this.setState({
+            isNavOpen: ! this.state.isNavOpen
+        })
+    }
     render(){
         return(
             <React.Fragment>
-                <Navbar dark color="primary">
+                <Navbar dark color="primary" expand="md">
                     <div className="container">
-                        <NavbarBrand href="/" className="active">
-                            Ristorante Con Fusion
+                        <NavbarToggler onClick={this.toggleNav} />
+                        <NavbarBrand href="/" className="active mr-auto">
+                            <img src="assets/images/logo.png" alt="Ristorante ConFusion" width="41" height="30"></img>
                         </NavbarBrand>
+                        <Collapse isOpen={this.state.isNavOpen} navbar>
+                        <Nav navbar>
+                        <NavItem>
+                                <NavLink className="nav-link" to="./home"><span className="fa fa-home fa-lg"></span> Home</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="./home"><span className="fa fa-info fa-lg"></span> About us</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="./menu"><span className="fa fa-list fa-lg"></span> Menu</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to="./home"><span className="fa fa-address-card fa-lg"></span> Contact us</NavLink>
+                            </NavItem>
+                        </Nav>
+                        </Collapse>
                     </div>
 
                 </Navbar>
-                <Jumbotron>
+                <Jumbotron className="bg-secondary">
                     <div className="container">
                     <div className="row row-header">
                    <div className="col-12 col-sm-6">

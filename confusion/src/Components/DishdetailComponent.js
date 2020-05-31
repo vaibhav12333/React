@@ -9,7 +9,7 @@ function RenderDish(dish) {
                 <Card>
                     <CardImg top src={dish.image} alt={dish.name} />
                     <CardBody>
-                      <CardTitle> { dish.name } </CardTitle>
+                      <CardTitle> { dish.name } </CardTitle>         
                       <CardText> { dish.description } </CardText>
                     </CardBody>
                 </Card>
