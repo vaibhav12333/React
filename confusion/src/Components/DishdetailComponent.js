@@ -59,7 +59,8 @@ function RenderDish(dish) {
       <div className="container">
          <div className="row">
           <Breadcrumb classNAme="col-12 m-1">
-              <BreadcrumbItem><Link to ="./menu">Menu</Link></BreadcrumbItem>
+              <BreadcrumbItem><Link to='../home'>Home</Link></BreadcrumbItem>
+              <BreadcrumbItem><Link to ="../menu">Menu</Link></BreadcrumbItem>
               <BreadcrumbItem active>Dish</BreadcrumbItem>
           </Breadcrumb>
           <div className="col-12 m-1">
