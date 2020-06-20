@@ -20,9 +20,8 @@ class CommentForm extends Component{
     })
 }
 handleSubmit(values){
-      console.log("current state is: " + JSON.stringify(values))
-      alert("current state is: " + JSON.stringify(values))
-      event.preventDefault()
+      this.toggleModal() 
+      this.props.addComment(this.props.dishId, values.rating , values.author , values.comment)
 }
  
   render(){
@@ -105,8 +104,8 @@ function RenderDish(dish) {
                 );
     }
 
- function RenderComments(comments) {
-      var commentList = comments.map((comment) => {
+ function RenderComments(comments , addComment, dishId ) {
+      var CommentList = comments.map((comment) => {
         return (
           <li key={comment.id}>
             {comment.comment}
@@ -128,8 +127,9 @@ function RenderDish(dish) {
         <div>
             <h4>Comments</h4>
             <ul className="list-unstyled">
-                {commentList}
+              {CommentList}
             </ul>
+            <CommentForm dishId={dishId} addComment={addComment} />
         </div>
     );
 }
@@ -156,8 +156,8 @@ function RenderDish(dish) {
           {RenderDish(props.dish)}
        </div>
       <div className="col-12 col-md-5 m-1">
-        {RenderComments(props.comments)}
-        <CommentForm />
+        {RenderComments(props.comments , props.addComment , props.dish.id)}
+        
       </div>
     </div>
      </div> // <div className="container">
