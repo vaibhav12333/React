@@ -9,6 +9,36 @@ export const addComment = (comment) => ({
     type: ActionTypes.ADD_COMMENT,
     payload: comment
 })
+export const postFeedback = (feedback) => (dispatch) => {
+    const newFeedback = feedback
+    return fetch(baseUrl + 'feedback', {
+        method: "POST",
+        body: JSON.stringify(newFeedback),
+        headers: {
+            "Content-Type" : "application/json"
+        }
+        , credentials: 'same-origin'
+    })
+    .then(response => {
+        if(response.ok){
+            return response;
+        }
+        else{
+            var error = new Error('Error' + response.status +  response.statusText)
+            error.response = response;
+            throw error;
+        }
+    },
+    error =>{
+        throw error;
+    })
+    .then(response => response.json())
+    .then(response => dispatch(alert('Thank You for your Feedback' + JSON.stringify(response))))
+    .catch(error => console.log('post Feedback', error.message)
+    ,alert('failed to post'))
+
+
+}
 export const postComment = (dishId , rating , author , comment) => (dispatch) =>{
     const newComment = {
         dishId: dishId,
@@ -48,6 +78,38 @@ export const postComment = (dishId , rating , author , comment) => (dispatch) =>
 
     
 }
+export const fetchLeaders = () => (dispatch) => {
+    dispatch(leadsLoading(true))
+    return fetch(baseUrl + 'leaders')
+    .then(response =>{
+        if(response.ok){
+            return response;
+        }
+        else{
+            var error = new Error('Error' + response.status + ':' + response.statusText)
+            error.response = response;
+            throw error;
+        }},
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess
+        })
+    .then(response => response.json())
+    .then(leaders => dispatch(addLeaders(leaders)))
+    .catch(error => dispatch(leadsFailed(error.message)))
+
+}
+export const addLeaders = (leaders) => ({
+        type: ActionTypes.ADD_LEADERS,
+        payload: leaders
+})
+export const leadsFailed = (errmess) => ({
+    type: ActionTypes.LEADS_FAILED,
+    payload: errmess
+})
+export const leadsLoading = () =>({
+    type: ActionTypes.LEADS_LOADING
+})
  
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));

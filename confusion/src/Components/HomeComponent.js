@@ -47,7 +47,7 @@ return(
                 <RenderCard item={props.promos} isLoading={props.promoLoading} errMess={props.promoErrMess} />
             </div>
             <div className="col-12 col-md m-1">
-                <RenderCard item={props.leads} />
+                <RenderCard item={props.leads} errMess = {props.leadsErrMess} isLoading = {props.leadsLoading} />
             </div>
 
         </div>
