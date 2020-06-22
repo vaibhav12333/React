@@ -4,6 +4,7 @@ import {LocalForm, Control , Errors} from 'react-redux-form'
 import {Link} from 'react-router-dom'
 import {Loading} from './Loading'
 import {baseUrl} from '../shared/baseUrl'
+import {Fade , FadeTransform , Stagger} from 'react-animation-components'
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -91,6 +92,11 @@ handleSubmit(values){
 function RenderDish(dish) {
         if (dish != null)
             return(
+              <FadeTransform
+              in
+              transformProps={{
+                  exitTransform: 'scale(0.5) translateY(-50%)'
+              }}>
                 <Card>
                     <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
@@ -98,6 +104,7 @@ function RenderDish(dish) {
                       <CardText> { dish.description } </CardText>
                     </CardBody>
                 </Card>
+                </FadeTransform>
              );
         else
             return(
@@ -109,6 +116,7 @@ function RenderDish(dish) {
  function RenderComments(comments , postComment, dishId ) {
       var CommentList = comments.map((comment) => {
         return (
+        <Fade>
           <li key={comment.id}>
             {comment.comment}
             <br />
@@ -122,6 +130,7 @@ function RenderDish(dish) {
             <br />
             <br />
           </li>
+          </Fade>
         );
       });
 
@@ -129,7 +138,8 @@ function RenderDish(dish) {
         <div>
             <h4>Comments</h4>
             <ul className="list-unstyled">
-              {CommentList}
+            <Stagger in>
+              {CommentList}</Stagger>
             </ul>
             <CommentForm dishId={dishId} postComment={postComment} />
         </div>
